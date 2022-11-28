@@ -199,7 +199,7 @@ if __name__ == "__main__":
 
 						# Prints the asteroid data to terminal
 						logger.info("------------------------------------------------------- >>")
-						logger.info("Asteroid name: " + str(tmp_ast_name) + " | INFO: " + str(tmp_ast_nasa_jpl_url) + " | Diameter: " + str(tmp_ast_diam_min) + " - " + str(tmp_ast_diam_max) + " km | Hazardous: " + str(tmp_ast_hazardous))
+						logger.info("Asteroid name: " + str(tmp_ast_name) + " | INFO: " + str(tmp_ast_nasa_jpl_url) + " | Diameter: " + str(tmp_ast_diam_min) + " - " + str(tmp_ast_diam_max) + " km | Hazardous: " + str(tmp_ast_hazardous) + " | ID: " + str(tmp_ast_id))
 						logger.info("Close approach TS: " + str(tmp_ast_close_appr_ts) + " | Date/time UTC TZ: " + str(tmp_ast_close_appr_dt_utc) + " | Local TZ: " + str(tmp_ast_close_appr_dt))
 						logger.info("Speed: " + str(tmp_ast_speed) + " km/h" + " | MISS distance: " + str(tmp_ast_miss_dist) + " km")
 						
@@ -214,7 +214,7 @@ if __name__ == "__main__":
 
 		logger.info("Hazardous asteorids: " + str(len(ast_hazardous)) + " | Safe asteroids: " + str(len(ast_safe)))
 
-		# Detects if any asteroid is going to pass earth today
+		# Detects if any hazerdous asteroid exists and are pushed to the DB
 		if len(ast_hazardous) > 0:
 
 			ast_hazardous.sort(key = lambda x: x[4], reverse=False)
@@ -231,7 +231,7 @@ if __name__ == "__main__":
 		else:
 			logger.info("No asteroids close passing earth today")
 		
-		# If any asteroids were detected, they are pushed to the DB
+		# If any safe asteroids were detected, they are pushed to the DB
 		if len(ast_safe) > 0:	
 			push_asteroids_arrays_to_db(request_date, ast_safe, 0)
 	else:
